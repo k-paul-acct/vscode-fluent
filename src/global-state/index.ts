@@ -35,7 +35,7 @@ type ProjectFtls = {
 let globalProjectsFtls: ProjectFtls
 
 const updateGlobalProjectsFtls = async (): Promise<void> => {
-  const projects = workspace.getConfiguration('vscodeFluent').get('projects') as string[]
+  const projects = workspace.getConfiguration('vscode-fluent').get<string[]>('projects', [])
   const associationsEntries = await Promise.all(
     projects.map(async path => [
       path,
@@ -138,11 +138,11 @@ const getAssociatedFluentFilesByFilePath = (path: string) => {
     .filter(associatePath => path.includes(associatePath))
 
   if (projectsPath.length === 0) {
-    return { error: `There is no project associated to the path "${path}". Check the config "vscodeFluent.projects"` }
+    return { error: `There is no project associated to the path "${path}". Check the config "vscode-fluent.projects"` }
   }
 
   if (projectsPath.length > 1) {
-    return { error: `Multiple projects associated to the path "${path}". Check the config "vscodeFluent.projects"` }
+    return { error: `Multiple projects associated to the path "${path}". Check the config "vscode-fluent.projects"` }
   }
 
   return globalProjectsFtls.associations[projectsPath[0]]

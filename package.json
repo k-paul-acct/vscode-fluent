@@ -1,13 +1,12 @@
 {
-  "name": "vscode-fluent",
-  "displayName": "vscode-fluent",
+  "name": "my-vscode-fluent",
+  "displayName": "my-vscode-fluent",
   "description": "VS Code extension to work with Fluent, the correct-by-design l10n programming language",
   "version": "1.1.0",
-  "publisher": "macabeus",
   "icon": "assets/logo.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/macabeus/vscode-fluent.git"
+    "url": "https://github.com/k-paul-acct/vscode-fluent.git"
   },
   "scripts": {
     "build": "npm run build:syntaxes && npm run build:extension",
@@ -19,28 +18,32 @@
     "tests:ci:with-workspace": "vscode-electron-starter with-workspace insiders out/tests/with-workspace"
   },
   "engines": {
-    "vscode": "^1.50.0"
+    "vscode": "^1.75.0"
   },
   "categories": [
     "Programming Languages"
   ],
   "main": "./out/src/extension.js",
   "activationEvents": [
-    "*"
   ],
   "contributes": {
     "configuration": {
-      "title": "vscode-fluent",
+      "title": "my-vscode-fluent",
       "properties": {
-        "vscodeFluent.replacementTemplate": {
+        "vscode-fluent.replacementTemplate": {
           "type": "string",
           "default": "t('$1')",
           "description": "Template used when extracting a string with the code action 'Extract to Fluent files'. Use $1 to get the message id."
         },
-        "vscodeFluent.projects": {
+        "vscode-fluent.projects": {
           "type": "array",
-          "default": [],
+          "default": [ ],
           "description": "If you are working on a workspace with multiple projects, you will need to specify the root of each project so that Fluent files aren't mixed between projects"
+        },
+        "vscode-fluent.diagnostics.errors.emit": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable or disable the emission of error diagnostics for Fluent files."
         }
       }
     },
@@ -70,18 +73,13 @@
     "path": "0.12.7"
   },
   "devDependencies": {
-    "@types/jest": "27.0.1",
-    "@types/glob": "7.1.4",
-    "@types/node": "14.11.10",
-    "@types/vscode": "^1.50.0",
-    "@types/jest-environment-vscode-extension": "0.0.2",
-    "@typescript-eslint/eslint-plugin": "7.1.0",
-    "@typescript-eslint/parser": "7.1.0",
-    "jest-environment-vscode-extension": "0.0.5",
-    "eslint": "8.57.0",
-    "jest": "27.4.3",
-    "js-yaml": "4.1.0",
-    "vscode-test": "1.6.1",
-    "typescript": "5.3.3"
+    "@types/jest": "30.0.0",
+    "@types/node": "24.9.2",
+    "@types/vscode": "^1.75.0",
+    "@typescript-eslint/eslint-plugin": "8.46.2",
+    "@typescript-eslint/parser": "8.46.2",
+    "eslint": "9.39.0",
+    "jest": "30.2.0",
+    "typescript": "5.9.3"
   }
 }

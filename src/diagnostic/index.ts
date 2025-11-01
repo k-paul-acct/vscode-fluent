@@ -11,13 +11,17 @@ const diagnosticCollections: {
 } = {}
 
 const updateDiagnosticCollection = async (uri: string) => {
-  const textDocument = await workspace.openTextDocument(uri)
-
   if (diagnosticCollections[uri] === undefined) {
     diagnosticCollections[uri] = languages.createDiagnosticCollection(uri)
   }
   diagnosticCollections[uri].clear()
 
+  const emitErrors = workspace.getConfiguration('vscode-fluent').get<boolean>('diagnostics.errors.emit', true)
+  if (!emitErrors) {
+    return
+  }
+
+  const textDocument = await workspace.openTextDocument(uri)
   const diagnostics = [
     ...diagnosticsFromJunkAnnotations(uri, textDocument),
   ]

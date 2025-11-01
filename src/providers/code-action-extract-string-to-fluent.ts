@@ -152,7 +152,7 @@ const commandExtractStringToFluent = {
       }))
 
     const replaceSelectedString = (id: string) => {
-      const template = workspace.getConfiguration('vscodeFluent').get('replacementTemplate') as string
+      const template = workspace.getConfiguration('vscode-fluent').get<string>('replacementTemplate', "t('$1')")
       const replacementCode = template.replace('$1', id)
 
       const workspaceEdit = new WorkspaceEdit()
